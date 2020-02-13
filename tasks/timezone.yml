@@ -1,17 +1,8 @@
 ---
-- name: ensure system-wize timezone is configured
-  block:
-
-  - name: ensure system-wide localtime is configured
-    file:
-      src: /usr/share/zoneinfo/{{ timezone_zone }}
-      dest: /etc/localtime
-      state: link
-      force: true
-
-  - name: ensure system-wide timezone is configured
-    template:
-      src: timezone.j2
-      dest: /etc/timezone
-    notify: ensure tzdata is reconfigured
-  become: true
+- name: ensure timezone
+  shell: |
+    timedatectl set-timezone {{ timezone_name }}
+    timedatectl show -p Timezone --value
+  register: ensured_timezone
+  changed_when: timezone_name == timezone.stdout
+  when: timezone_name != timezone.stdout

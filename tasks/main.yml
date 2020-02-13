@@ -1,2 +1,7 @@
 ---
-- import_tasks: timezone.yml
+- name: ensure timezone
+  block:
+    - import_tasks: environment.yml
+    - import_tasks: timezone.yml
+  tags:
+    - timezone

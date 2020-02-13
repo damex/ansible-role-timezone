@@ -1,0 +1,17 @@
+---
+- name: get current timezone
+  command: timedatectl show -p Timezone --value
+  register: timezone
+  changed_when: false
+
+- name: get available timezones
+  command: timedatectl list-timezones --no-pager
+  register: timezone_list
+  changed_when: false
+
+- name: ensure timezone is valid
+  fail:
+    msg:
+      - "Please define a correct timezone_name variable!"
+      - "{{ timezone_name }} is incorrect."
+  when: timezone_name not in timezone_list.stdout
