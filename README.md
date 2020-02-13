@@ -1,6 +1,6 @@
 # ansible timezone role
 
-[![Build Status](https://travis-ci.org/damex/ansible-role-timezone.svg?branch=master)](https://travis-ci.org/damex/ansible-role-timezone)
+[![Build Status](https://travis-ci.com/damex/ansible-role-timezone.svg?branch=master)](https://travis-ci.com/damex/ansible-role-timezone)
 
 The timezone role is designed to be used with Debian distributive.
 
