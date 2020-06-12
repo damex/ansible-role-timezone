@@ -1,8 +1,5 @@
 ---
 - name: ensure timezone
-  shell: |
-    timedatectl set-timezone {{ timezone_name }}
-    timedatectl show -p Timezone --value
-  register: ensured_timezone
-  changed_when: timezone_name == timezone.stdout
-  when: timezone_name != timezone.stdout
+  command: timedatectl set-timezone {{ timezone_name }}
+  when: timezone_name not in timezone.stdout
+  become: true
